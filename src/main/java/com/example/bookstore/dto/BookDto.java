@@ -1,4 +1,4 @@
-package com.example.bookstore.models;
+package com.example.bookstore.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
