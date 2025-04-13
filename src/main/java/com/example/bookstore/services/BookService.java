@@ -1,39 +1,49 @@
 package com.example.bookstore.services;
 
+import com.example.bookstore.dto.BookDto;
 import com.example.bookstore.mappers.BookMapper;
 import com.example.bookstore.models.Book;
 import com.example.bookstore.repositories.BookRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class BookService {
 
     private final BookRepository bookRepository;
-    @Getter
     private final BookMapper bookMapper;
 
-//    @Autowired
-//    public BookService(BookRepository bookRepository) {  // заменить метод на аннотацию @requiredArgsConstructor?
-//        this.bookRepository = bookRepository;
-//    }
-
-    public List<Book> findAll() {
-        return bookRepository.findAll();
+    @Autowired
+    public BookService(BookRepository bookRepository, BookMapper bookMapper) {  // заменить метод на аннотацию @requiredArgsConstructor?
+        this.bookRepository = bookRepository;
+        this.bookMapper = bookMapper;
     }
 
-    public Book findById(long id) {
-        return bookRepository.findById(id).orElseThrow(() ->
+    public List<BookDto> findAll() {
+        return bookRepository.findAll()
+                .stream()
+                .map(bookMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public BookDto findById(long id) {
+        return bookRepository.findById(id)
+                .map(bookMapper::toDto)
+                .orElseThrow(() ->
                 new RuntimeException("Book not found"));
     }
 
-    public Book save(Book book) {
-        return bookRepository.save(book);
+    public BookDto save(BookDto bookDto) {
+        Book book = bookMapper.toEntity(bookDto); // превращаем Dto сущность в совместимую с БД
+        Book bookSaved = bookRepository.save(book); // сохраняем конвертированную сущность в БД
+
+        return bookMapper.toDto(bookSaved);
     }
 
     public void deleteById(long id) {

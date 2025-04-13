@@ -8,7 +8,7 @@ import lombok.*;
 /// Почему то Getter и Setter не отрабатывают. Если не писать их самому то нельзя получить доступ к полям
 @Entity
 @NoArgsConstructor
-@Data// create  getters, setters, hashcode, toString and Constructor with args
+@Data
 @Table(name = "book")
 public class Book {
 

@@ -23,18 +23,18 @@ public class BookController {
     }
 
     @GetMapping()
-        public List<Book> getBooks() {
+        public List<BookDto> getBooks() {
         return bookService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Book getBook(@PathVariable("id") Long id) {
+    public BookDto getBook(@PathVariable("id") Long id) {
         return bookService.findById(id);
     }
 
     @PostMapping
-    public Book saveBook(Book book) {
-        return bookService.save(book);
+    public BookDto saveBook(BookDto bookDto) {
+        return bookService.save(bookDto);
     }
 
     @DeleteMapping("/delete/{id}")
