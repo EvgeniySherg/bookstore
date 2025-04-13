@@ -1,5 +1,6 @@
 package com.example.bookstore.controllers;
 
+import com.example.bookstore.dto.BookDto;
 import com.example.bookstore.models.Book;
 import com.example.bookstore.repositories.BookRepository;
 import com.example.bookstore.services.BookService;

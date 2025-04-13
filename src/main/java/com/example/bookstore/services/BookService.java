@@ -1,23 +1,27 @@
 package com.example.bookstore.services;
 
+import com.example.bookstore.mappers.BookMapper;
 import com.example.bookstore.models.Book;
 import com.example.bookstore.repositories.BookRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class BookService {
 
     private final BookRepository bookRepository;
+    @Getter
+    private final BookMapper bookMapper;
 
-    @Autowired
-    public BookService(BookRepository bookRepository) {  // заменить метод на аннотацию @requiredArgsConstructor?
-        this.bookRepository = bookRepository;
-    }
+//    @Autowired
+//    public BookService(BookRepository bookRepository) {  // заменить метод на аннотацию @requiredArgsConstructor?
+//        this.bookRepository = bookRepository;
+//    }
 
     public List<Book> findAll() {
         return bookRepository.findAll();
