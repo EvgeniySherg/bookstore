@@ -4,15 +4,16 @@ import com.example.bookstore.dto.BookDto;
 import com.example.bookstore.models.Book;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
-@Mapper (componentModel = "spring")
+@Mapper
 public interface BookMapper {
 
 
 
-    @Mapping(source = "name", target = "title")
+
     BookDto toDto(Book book);
 
-    @Mapping(source = "title", target = "name")
+
     Book toEntity(BookDto bookDto);
 }

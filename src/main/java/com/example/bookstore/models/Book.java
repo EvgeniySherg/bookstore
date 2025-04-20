@@ -8,8 +8,8 @@ import lombok.*;
 /// Почему то Getter и Setter не отрабатывают. Если не писать их самому то нельзя получить доступ к полям
 @Entity
 @NoArgsConstructor
-@Data
 @Table(name = "book")
+@Data
 public class Book {
 
     @Id
@@ -29,7 +29,7 @@ public class Book {
     @Column(name = "publisher", nullable = false)
     private String publisher; // brand
 
-    @NotNull (message = "колличество книг не может быть null")
+
     @Column (name = "count", nullable = false)
     private Integer count;
 
